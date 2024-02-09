@@ -1,0 +1,8 @@
+﻿SET QUOTED_IDENTIFIER, ANSI_NULLS ON
+GO
+CREATE FUNCTION [Meta].[fnGetViewName] (@ClassName VARCHAR(64))
+RETURNS VARCHAR(64)
+BEGIN
+  RETURN 'V' + RIGHT(@ClassName, LEN(@ClassName) - 1) + 's';
+END;
+GO

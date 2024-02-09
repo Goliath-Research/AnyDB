@@ -1,0 +1,17 @@
+﻿SET QUOTED_IDENTIFIER, ANSI_NULLS ON
+GO
+CREATE PROCEDURE [Meta].[spObjectInsert](@ClassID INT, @ID BIGINT OUTPUT)
+AS 
+BEGIN
+  IF NOT EXISTS (SELECT * FROM Meta.TClass WHERE ID = @ClassID)
+  BEGIN
+    SET @ID = NULL;
+    RETURN;
+  END;
+
+  INSERT INTO dbo.TObject(ClassID)
+    VALUES(@ClassID);
+
+  SET @ID = (SELECT IDENT_CURRENT('TObject'));
+END;
+GO
